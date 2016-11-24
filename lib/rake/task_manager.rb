@@ -5,12 +5,16 @@ module Rake
     # Track the last comment made in the Rakefile.
     attr_accessor :last_description
 
+    # Track the last hidden status made in the Rakefile.
+    attr_accessor :last_hidden
+
     def initialize # :nodoc:
       super
       @tasks = Hash.new
       @rules = Array.new
       @scope = Scope.make
       @last_description = nil
+      @last_hidden = nil
     end
 
     def create_rule(*args, &block) # :nodoc:
