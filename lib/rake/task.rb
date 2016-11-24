@@ -102,6 +102,7 @@ module Rake
       @scope           = app.current_scope
       @arg_names       = nil
       @locations       = []
+      @hidden          = false
     end
 
     # Enhance a task with prerequisites or actions.  Returns self.
@@ -274,6 +275,15 @@ module Rake
       return unless description
       comment = description.strip
       add_comment(comment) if comment && ! comment.empty?
+    end
+
+    # Set hidden status to the task.
+    def hidden=(hidden) # :nodoc:
+      @hidden = hidden
+    end
+
+    def hidden? # :nodoc:
+      @hidden
     end
 
     def comment=(comment) # :nodoc:
