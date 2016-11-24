@@ -280,7 +280,7 @@ module Rake
     # Display the tasks and comments.
     def display_tasks_and_comments # :nodoc:
       displayable_tasks = tasks.select { |t|
-        (options.show_all_tasks || t.comment) &&
+        (options.show_all_tasks || (t.comment && ! t.hidden?)) &&
           t.name =~ options.show_task_pattern
       }
       case options.show_tasks
