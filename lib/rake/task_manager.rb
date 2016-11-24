@@ -41,6 +41,7 @@ module Rake
       if Rake::TaskManager.record_task_metadata
         add_location(task)
         task.add_description(get_description(task))
+        task.hidden = get_hidden(task)
       end
       task.enhance(deps, &block)
     ensure
@@ -289,6 +290,13 @@ module Rake
         end
       }
       result.flatten
+    end
+
+    # Return the current hidden status, clearing it in the process.
+    def get_hidden(task)
+      hidden = @last_hidden
+      @last_hidden = false
+      hidden
     end
 
     # Return the current description, clearing it in the process.

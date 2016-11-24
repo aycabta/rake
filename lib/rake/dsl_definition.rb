@@ -165,6 +165,10 @@ module Rake
       Rake.application.last_description = description
     end
 
+    def hidden # :doc
+      Rake.application.last_hidden = true
+    end
+
     # Import the partial Rakefiles +fn+.  Imported files are loaded
     # _after_ the current file is completely loaded.  This allows the
     # import statement to appear anywhere in the importing file, and yet
