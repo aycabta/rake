@@ -57,6 +57,26 @@ class TestRakeFunctional < Rake::TestCase
     assert_match(/foo\nbar\n/, @out)
   end
 
+  def test_hidden
+    rakefile_hidden
+
+    rake "-T"
+
+    refute_match %r{^rake shared_task *# SHARED TASK *$}, @out
+    assert_match %r{^rake a *# A *$}, @out
+    assert_match %r{^rake b *# B *$}, @out
+  end
+
+  def test_all_task_with_hidden
+    rakefile_hidden
+
+    rake "-AT"
+
+    assert_match %r{^rake shared_task *# SHARED TASK *$}, @out
+    assert_match %r{^rake a *# A *$}, @out
+    assert_match %r{^rake b *# B *$}, @out
+  end
+
   def test_multi_desc
     ENV["RAKE_COLUMNS"] = "80"
     rakefile_multidesc
