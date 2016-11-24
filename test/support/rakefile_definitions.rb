@@ -271,6 +271,20 @@ puts "INITIAL"
     end
   end
 
+  def rakefile_hidden
+    rakefile <<-HIDDENTASK
+hidden
+desc "SHARED TASK"
+task :shared_task
+
+desc "A"
+task :a => :shared_task
+
+desc "B"
+task :b => :shared_task
+    HIDDENTASK
+  end
+
   def rakefile_multidesc
     rakefile <<-MULTIDESC
 task :b
